@@ -28,5 +28,11 @@ Route::middleware('guest')->group(function() {
 
 Route::middleware('auth')->group(function() {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('gig/create', [GigController::class, 'create'])->name('gig.create');
+    Route::post('gig/store', [GigController::class, 'store'])->name('gig.store');
+
+
+
 });
 
