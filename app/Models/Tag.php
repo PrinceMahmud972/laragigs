@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Gig extends Model
+class Tag extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = ['tag_name'];
 
-    public function tags() {
-        return $this->belongsToMany(Tag::class, 'gig_tag');
+    public function gigs() {
+        return $this->belongsToMany(Gig::class, 'gig_tag');
     }
 }

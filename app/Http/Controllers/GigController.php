@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gig;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class GigController extends Controller
@@ -16,6 +17,20 @@ class GigController extends Controller
     }
 
     public function store(Request $request) {
+
+        $tags = [];
+
+        foreach($request->tags as $key => $val) {
+            $tag = Tag::find($val);
+            if(!$tag) {
+                $tag = Tag::create(['tag_name' => $val]);
+                $tags[$key] = $tag->id;
+            } else {
+                $tags[$key] = $val;
+            }
+        }
+
+        $array_tags = array_values($tags);
 
         $request->validate([
             'company' => 'required',
@@ -41,6 +56,7 @@ class GigController extends Controller
         $gig->logo = $imageName;
         $gig->job_description = $request->description;
         $gig->save();
+        $gig->tags()->attach($tags);
 
         return redirect()->route('home')->with('success', 'successfully created a gig');
 

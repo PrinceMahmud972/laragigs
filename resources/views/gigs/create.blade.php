@@ -123,12 +123,17 @@
                     <label for="tags" class="inline-block text-lg mb-2">
                         Tags (Comma Separated)
                     </label>
-                    <input
+                    <select class="js-example-basic-multiple border border-gray-200 rounded p-2 w-full" id="multiple_tags" name="tags[]" multiple="multiple">
+                        @foreach (App\Models\Tag::all() as $tag)
+                            <option value="{{ $tag->id }}">{{ $tag->tag_name }}</option>
+                        @endforeach
+                    </select>
+                    {{-- <input
                         type="text"
                         class="border border-gray-200 rounded p-2 w-full"
                         name="tags"
                         placeholder="Example: Laravel, Backend, Postgres, etc"
-                    />
+                    /> --}}
                 </div>
 
                 <div class="mb-6">
