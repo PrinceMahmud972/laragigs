@@ -15,6 +15,13 @@ class CreateGigsTable extends Migration
     {
         Schema::create('gigs', function (Blueprint $table) {
             $table->id();
+            $table->string('company_name');
+            $table->string('job_title');
+            $table->string('job_location');
+            $table->string('contact_email');
+            $table->string('url');
+            $table->string('logo');
+            $table->longText('job_description');
             $table->timestamps();
         });
     }
