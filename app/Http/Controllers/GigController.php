@@ -9,7 +9,13 @@ use Illuminate\Http\Request;
 class GigController extends Controller
 {
     public function index() {
-        return view('home');
+        $gigs = Gig::latest()->get();
+        return view('home', ['gigs' => $gigs]);
+    }
+
+    public function show($id) {
+        $gig = Gig::findOrFail($id);
+        return view('gigs.show', ['gig' => $gig]);
     }
 
     public function create() {
@@ -59,7 +65,18 @@ class GigController extends Controller
         $gig->tags()->attach($tags);
 
         return redirect()->route('home')->with('success', 'successfully created a gig');
-
-
     }
+
+
+    public function search(Request $request) {
+        $request->validate([
+            'search' => 'required|regex:/([A-Za-z ])\w+/'
+        ]);
+
+        $gigs = Gig::where('job_title', 'like', '%'. $request->search .'%')
+                    ->orWhere('company_name', 'like', '%'. $request->search .'%')
+                    ->get();
+        return view('home', ['gigs' => $gigs]);
+    }
+
 }

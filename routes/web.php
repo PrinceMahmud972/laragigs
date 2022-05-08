@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [GigController::class, 'index'])->name('home');
+Route::get('/gig/{id}', [GigController::class, 'show'])->name('gig.show');
+Route::post('/gig/search', [GigController::class, 'search'])->name('gig.search');
 
 Route::middleware('guest')->group(function() {
     Route::get('/login', [AuthController::class, 'viewLogin'])->name('login');
