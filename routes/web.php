@@ -16,8 +16,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [GigController::class, 'index'])->name('home');
+
+Route::get('/gig/create', [GigController::class, 'create'])->name('gig.create');
+Route::post('/gig', [GigController::class, 'store'])->name('gig.store');
 Route::get('/gig/{id}', [GigController::class, 'show'])->name('gig.show');
+Route::get('/gig/{id}/edit', [GigController::class, 'edit'])->name('gig.edit');
+Route::put('/gig/{id}', [GigController::class, 'update'])->name('gig.update');
 Route::post('/gig/search', [GigController::class, 'search'])->name('gig.search');
+Route::delete('/gig/{id}', [GigController::class, 'destroy'])->name('gig.delete');
+
+Route::get('/tag/{id}', [GigController::class, 'FindByTag'])->name('gig.tag');
 
 Route::middleware('guest')->group(function() {
     Route::get('/login', [AuthController::class, 'viewLogin'])->name('login');
@@ -28,13 +36,8 @@ Route::middleware('guest')->group(function() {
 });
 
 
-Route::middleware('auth')->group(function() {
-    Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    Route::get('gig/create', [GigController::class, 'create'])->name('gig.create');
-    Route::post('gig/store', [GigController::class, 'store'])->name('gig.store');
+Route::get('/manage', [GigController::class, 'adminHome'])->name('adminHome');
 
-
-
-});
 

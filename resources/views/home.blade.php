@@ -36,7 +36,7 @@
                         <li
                             class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
                         >
-                            <a href="/tag/{{ $tag->id }}">{{ $tag->tag_name }}</a>
+                            <a href="{{ route('gig.tag', ['id' => $tag->id]) }}">{{ $tag->tag_name }}</a>
                         </li>
                         @endforeach
                     </ul>

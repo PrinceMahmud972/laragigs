@@ -10,8 +10,13 @@
                 </p>
             </li>
             <li>
-                <a href="register.html" class="hover:text-laravel"
+                <a href="{{ route('adminHome') }}" class="hover:text-laravel"
                     ><i class="fa-solid fa-gear"></i> Manage Gigs</a
+                >
+            </li>
+            <li>
+                <a href="{{ route('gig.create') }}" class="hover:text-laravel"
+                    ><i class="fa-solid fa-gear"></i> Create Gig</a
                 >
             </li>
             <li>
